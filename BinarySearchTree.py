@@ -1,3 +1,4 @@
+import timeit
 class Node:
 
     def __init__(self, value):
@@ -9,8 +10,6 @@ class Node:
         left = f'[{self.left.value}]' if self.left else '[]'
         right = f'[{self.right.value}]' if self.right else '[]'
         return f'{left} <- {self.value} -> {right}'
-
-
 
 class BinarySearchTree:
     def __init__(self):
@@ -41,13 +40,16 @@ class BinarySearchTree:
                 node = p.right
         return p, direction
 
-btree = BinarySearchTree()
+def main(li):
+    btree=BinarySearchTree()
+    for v in li:
+        btree.add_node(v)
+
+    for node in btree.nodes:
+        print(node)
 
 n_len = int(input("配列の要素数："))
 li = [int(input()) for _ in range(n_len)]
 
-for v in li:
-    btree.add_node(v)
-
-for node in btree.nodes:
-    print(node)
+main(li)
+print(timeit.timeit('main',globals=globals(),number=1))
